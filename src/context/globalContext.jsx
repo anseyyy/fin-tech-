@@ -15,11 +15,19 @@ export const GlobalProvider = ({ children }) => {
 
     //calculate incomes
     const addIncome = async (income) => {
-        const response = await axios.post(`${BASE_URL}add-incomes`, income)
-            .catch((err) => {
-                setError(err.response.data.message)
-            })
-        getIncomes()
+        // Ensure amount is a number before sending to backend
+        const payload = { ...income, amount: Number(income.amount) };
+        if (!payload.amount || isNaN(payload.amount) || payload.amount <= 0) {
+            setError('Enter correct amount');
+            return;
+        }
+
+        try {
+            await axios.post(`${BASE_URL}add-incomes`, payload);
+            getIncomes();
+        } catch (err) {
+            setError(err.response?.data?.message || 'Error adding income');
+        }
     }
 
     const getIncomes = async () => {
@@ -45,8 +53,15 @@ export const GlobalProvider = ({ children }) => {
 
     //calculate expenses
     const addExpense = async (expense) => {
+        // Ensure amount is a number before sending to backend
+        const payload = { ...expense, amount: Number(expense.amount) };
+        if (!payload.amount || isNaN(payload.amount) || payload.amount <= 0) {
+            setError('Enter correct amount');
+            return;
+        }
+
         try {
-            await axios.post(`${BASE_URL}add-expence`, expense);
+            await axios.post(`${BASE_URL}add-expence`, payload);
             getExpenses(); // refresh list immediately
         } catch (err) {
             setError(err.response?.data?.message || 'Error adding expense');
