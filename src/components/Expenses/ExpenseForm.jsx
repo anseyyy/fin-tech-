@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-import { useGlobalContext } from '../../context/GlobalContext';
+import { useGlobalContext } from '../../context/globalContext';
 import Button from '../Button/Button';
 import { plus } from "../../utils/Icon";
 
@@ -60,7 +60,7 @@ function ExpenseForm() {
                 <DatePicker
                     id="date"
                     placeholderText="Enter A Date"
-                    selected={date ? new Date(date) : null}  
+                    selected={date ? new Date(date) : null}
                     dateFormat="dd/MM/yyyy"
                     onChange={(date) => {
                         setInputState({ ...inputState, date: date.toISOString() })
@@ -90,7 +90,7 @@ function ExpenseForm() {
                     icon={plus}
                     bPad={'.8rem 1.6rem'}
                     bRad={'30px'}
-                    bg={'var(--color-accent'}
+                    bg={'var(--color-accent)'}
                     color={'#fff'}
                 />
             </div>

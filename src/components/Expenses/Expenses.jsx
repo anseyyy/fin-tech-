@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';   // ✅ this line is required
-import { useGlobalContext } from '../../context/GlobalContext';
+import { useGlobalContext } from '../../context/globalContext';
 import { InnerLayout } from '../../styles/Layouts';
 import ExpenseForm from './ExpenseForm';
-import IncomeItem from '../IncomeItem/IncomeItem.jsx';
+import IncomeItem from '../Income/IncomeItem.jsx';
 function Expenses() {
     const { expenses, getExpenses, deleteExpense, totalExpenses } = useGlobalContext();
 
@@ -35,7 +35,7 @@ function Expenses() {
                                     date={date}
                                     type={type}
                                     category={category}
-                                    indicatorColor="var(--color-green)"
+                                    indicatorColor="var(--color-accent)"
                                     deleteItem={deleteExpense}
                                 />
                             );
